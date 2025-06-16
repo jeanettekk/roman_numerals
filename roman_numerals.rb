@@ -7,8 +7,7 @@ def numeral_method(numeral, numeral_number)
     numeral_number + 6
   else
     numeral_count = numeral.scan('I').length
-    sum = numeral_count + numeral_number
-    sum
+    numeral_count + numeral_number
   end
 end
 
