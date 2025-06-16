@@ -4,7 +4,10 @@ def numeral_method(numeral, numeral_number)
   elsif numeral.include?('IV')
     numeral_number + 4
   else
-    numeral.count('I') + numeral_number
+    numeral_count = numeral.scan('I').length
+    sum = numeral_count + numeral_number
+    puts "Debug: I'm here: #{numeral}, numeral.count = #{numeral_count}, sum = #{sum}"
+    sum
   end
 end
 
