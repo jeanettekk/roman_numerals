@@ -1,8 +1,8 @@
 def numeral_method(numeral, numeral_number)
   if numeral.start_with?('I')
     numeral_number - 1
-  elsif numeral.end_with?('V') && numeral.length > 1
-    numeral.count('I') + numeral_number + 3
+  elsif numeral.include?('IV')
+    numeral_number + 4
   else
     numeral.count('I') + numeral_number
   end
