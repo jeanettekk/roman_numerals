@@ -2,7 +2,7 @@ def numeral_method(numeral, numeral_number)
   if numeral.start_with?('I')
     numeral_number - 1
   else
-    numeral.count('I123') + numeral_number
+    numeral.count('I') + numeral_number
   end
 end
 
