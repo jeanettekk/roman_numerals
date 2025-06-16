@@ -18,7 +18,9 @@ numbers = [
   ['VIII', 8],
   ['IX', 9],
   ['X', 10],
-  ['XII', 12]
+  ['XII', 12],
+  ['XIV', 14],
+  ['XVI', 16]
 ]
 
 # Parameterized test
