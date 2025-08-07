@@ -27,8 +27,10 @@ numbers = [
 # Parameterized test
 numbers.each do |roman, num|
   assert_that(roman_to_numeral(roman), num)
-  puts "✅ #{roman} = #{num}"
+  # puts "✅ #{roman} = #{num}"
 rescue StandardError => e
   puts "❌ #{roman} != #{num} : #{e.message}"
 end
+
+puts 'Done'
 
