@@ -12,10 +12,10 @@ def numeral_method(numeral, numeral_number)
 end
 
 def roman_to_numeral(numeral)
-  if numeral.include?('V') && !numeral.start_with?('X')
-    numeral_method(numeral, 5)
-  elsif numeral.include?('X')
+  if numeral.include?('X')
     numeral_method(numeral, 10)
+  elsif numeral.include?('V')
+    numeral_method(numeral, 5)
   else
     numeral.length
   end
