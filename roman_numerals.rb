@@ -3,6 +3,8 @@ def numeral_method(numeral, numeral_number)
     numeral_number - 1
   elsif numeral.include?('IV')
     numeral_number + 4
+  elsif numeral.include?('XVIII')
+    numeral_number + 8
   elsif numeral.include?('XVI')
     numeral_number + 6
   else

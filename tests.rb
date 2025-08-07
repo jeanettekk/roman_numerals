@@ -20,7 +20,8 @@ numbers = [
   ['X', 10],
   ['XII', 12],
   ['XIV', 14],
-  ['XVI', 16]
+  ['XVI', 16],
+  ['XVIII', 18]
 ]
 
 # Parameterized test
