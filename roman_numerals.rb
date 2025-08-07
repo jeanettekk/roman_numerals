@@ -5,6 +5,8 @@ def numeral_method(numeral, numeral_number)
     numeral_number + 4
   elsif numeral.include?('XV')
     numeral_number + 5 + numeral.scan('I').length
+  elsif numeral.include?('IX')
+    numeral_number + 9
   else
     numeral_count = numeral.scan('I').length
     numeral_count + numeral_number
