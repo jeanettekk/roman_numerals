@@ -3,10 +3,8 @@ def numeral_method(numeral, numeral_number)
     numeral_number - 1
   elsif numeral.include?('IV')
     numeral_number + 4
-  elsif numeral.include?('XVIII')
-    numeral_number + 8
-  elsif numeral.include?('XVI')
-    numeral_number + 6
+  elsif numeral.include?('XV')
+    numeral_number + 5 + numeral.scan('I').length
   else
     numeral_count = numeral.scan('I').length
     numeral_count + numeral_number
