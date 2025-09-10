@@ -13,14 +13,21 @@ def numeral_method(numeral, numeral_number, roman_special_chars)
   end
 end
 
+def has_special_chars(numeral, roman_special_chars)
+  numeral_array = numeral.split
+  numeral_array.each do |char|
+    char if roman_special_chars.include?(char)
+  end
+end
+
 def roman_to_numeral(numeral)
   roman_special_chars = {
     V: 5,
     X: 10
   }
-  if numeral.include?('X')
+  if has_special_chars(numeral, roman_special_chars)
     numeral_method(numeral, 10, roman_special_chars)
-  elsif numeral.include?('V')
+  elsif numeral.include?(roman_special_chars)
     numeral_method(numeral, 5, roman_special_chars)
   else
     numeral.length
