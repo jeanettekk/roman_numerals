@@ -1,34 +1,40 @@
-def numeral_method(numeral, numeral_number, roman_special_chars)
-  if numeral.start_with?('I')
-    numeral_number - 1
-  elsif numeral.include?('IV')
-    numeral_number + roman_special_chars[:V] - 1
-  elsif numeral.include?('XV')
-    numeral_number + 5 + numeral.scan('I').length
-  elsif numeral.include?('IX')
-    numeral_number + roman_special_chars[:X] - 1
+# frozen_string_literal: true
+
+def special_numerals_method(numeral, numeral_numbers_array)
+  numeral_I_count = numeral.scan('I').length
+
+  if numeral[0] == 'I'
+    numeral_numbers_array[0] - numeral_I_count
+  elsif numeral[-1] == 'I'
+    numeral_numbers_array.sum + numeral_I_count
   else
-    numeral_count = numeral.scan('I').length
-    numeral_count + numeral_number
+    numeral_numbers_array.sum - numeral_I_count
   end
 end
 
-def has_special_chars(numeral, roman_special_chars)
-  numeral_array = numeral.split
-  numeral_array.each do |char|
-    char if roman_special_chars.include?(char)
+def has_special_chars(numeral)
+  roman_special_chars = { 'V' => 5, 'X' => 10 }
+  special_chars_numbers = []
+
+  numeral.each_char do |char|
+    special_chars_numbers.push(roman_special_chars[char]) if roman_special_chars.include?(char)
   end
+
+  return false if special_chars_numbers.empty?
+
+  special_chars_numbers
 end
 
 def roman_to_numeral(numeral)
-  roman_special_chars = {
-    V: 5,
-    X: 10
-  }
-  if has_special_chars(numeral, roman_special_chars)
-    numeral_method(numeral, 10, roman_special_chars)
-  elsif numeral.include?(roman_special_chars)
-    numeral_method(numeral, 5, roman_special_chars)
+
+  special_chars_array = has_special_chars(numeral)
+
+  if special_chars_array
+    if numeral.length == 1
+      special_chars_array[0]
+    else
+      special_numerals_method(numeral, special_chars_array)
+    end
   else
     numeral.length
   end
