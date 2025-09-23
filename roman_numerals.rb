@@ -3,16 +3,14 @@
 def special_numerals_method(numeral, numeral_numbers_array)
   numeral_I_count = numeral.scan('I').length
 
-  if numeral[0] == 'I'
-    numeral_numbers_array[0] - numeral_I_count
-  elsif numeral[-1] == 'I'
+  if numeral[-1] == 'I'
     numeral_numbers_array.sum + numeral_I_count
   else
     numeral_numbers_array.sum - numeral_I_count
   end
 end
 
-def has_special_chars(numeral)
+def special_chars?(numeral)
   roman_special_chars = { 'V' => 5, 'X' => 10 }
   special_chars_numbers = []
 
@@ -27,7 +25,7 @@ end
 
 def roman_to_numeral(numeral)
 
-  special_chars_array = has_special_chars(numeral)
+  special_chars_array = special_chars?(numeral)
 
   if special_chars_array
     if numeral.length == 1
