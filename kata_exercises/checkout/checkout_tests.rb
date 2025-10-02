@@ -3,12 +3,12 @@
 require_relative 'scan'
 
 RSpec.describe Scan do
-  it 'equals to 0' do
+  it 'empty scanner should have total amount of 0' do
     co = Scan.new
     expect(0).to eq(co.total)
   end
 
-  it 'should equal to 0' do
+  it 'scanning empty items should not change the total' do
     co = Scan.new
     co.scan("")
     expect(0).to eq(co.total)
