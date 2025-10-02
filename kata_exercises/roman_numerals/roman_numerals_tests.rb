@@ -1,4 +1,4 @@
-require_relative 'roman_numerals'
+require_relative 'kata_exercises/roman_numerals/roman_numerals'
 
 def assert_that(actual, expected)
   return unless actual != expected
