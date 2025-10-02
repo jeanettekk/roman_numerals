@@ -6,8 +6,7 @@ class CheckOut
   end
 
   def scan(item)
-    # takes a string argument
-    # later you can update @total here
+    set_total(50) if item == "A"
   end
 
   private
