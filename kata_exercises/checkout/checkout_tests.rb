@@ -7,4 +7,10 @@ RSpec.describe Scan do
     co = Scan.new
     expect(0).to eq(co.total)
   end
+
+  it 'should equal to 0' do
+    co = Scan.new
+    co.scan("")
+    expect(0).to eq(co.total)
+  end
 end
