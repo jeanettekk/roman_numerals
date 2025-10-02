@@ -3,26 +3,27 @@
 require_relative 'check_out'
 
 RSpec.describe CheckOut do
+  let(:check_out) { CheckOut.new }
   it 'empty scanner should have total amount of 0' do
-    co = CheckOut.new
-    expect(co.total).to eq(0)
+    check_out
+    expect(check_out.total).to eq(0)
   end
 
   it 'scanning empty items should not change the total' do
-    co = CheckOut.new
-    co.scan("")
-    expect(co.total).to eq(0)
+    check_out
+    check_out.scan("")
+    expect(check_out.total).to eq(0)
   end
 
   it 'scans A to equal 50' do
-    co = CheckOut.new
-    co.scan("A")
-    expect(co.total).to eq(50)
+    check_out
+    check_out.scan("A")
+    expect(check_out.total).to eq(50)
   end
 
   it 'scans AA to a total of 100' do
-    co = CheckOut.new
-    co.scan("AA")
-    expect(co.total).to eq(100)
+    check_out
+    check_out.scan("AA")
+    expect(check_out.total).to eq(100)
   end
 end
