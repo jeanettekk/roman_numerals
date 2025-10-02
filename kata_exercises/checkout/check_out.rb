@@ -6,7 +6,11 @@ class CheckOut
   end
 
   def scan(item)
-    set_total(50) if item == "A"
+    if item == "A"
+      set_total(50)
+    elsif item == "AA"
+      set_total(100)
+    end
   end
 
   private

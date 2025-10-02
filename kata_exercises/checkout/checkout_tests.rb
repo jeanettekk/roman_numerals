@@ -19,4 +19,10 @@ RSpec.describe CheckOut do
     co.scan("A")
     expect(co.total).to eq(50)
   end
+
+  it 'scans AA to a total of 100' do
+    co = CheckOut.new
+    co.scan("AA")
+    expect(co.total).to eq(100)
+  end
 end
