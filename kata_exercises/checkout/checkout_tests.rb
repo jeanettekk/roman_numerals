@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require_relative 'scan'
+require_relative 'check_out'
 
-RSpec.describe Scan do
+RSpec.describe CheckOut do
   it 'empty scanner should have total amount of 0' do
-    co = Scan.new
+    co = CheckOut.new
     expect(0).to eq(co.total)
   end
 
   it 'scanning empty items should not change the total' do
-    co = Scan.new
+    co = CheckOut.new
     co.scan("")
     expect(0).to eq(co.total)
   end
