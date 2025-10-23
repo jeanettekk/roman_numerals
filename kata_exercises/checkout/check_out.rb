@@ -7,16 +7,9 @@ class CheckOut
   end
 
   def scan(item)
-    case item
-    when 'AAA'
-      set_total(150)
-    when 'A'
-      set_total(50)
-    when 'AA'
-      set_total(100)
-    else
-      set_total(0)
-    end
+    a_count = item.count('A')
+
+    set_total(a_count * 50)
   end
 
   private
