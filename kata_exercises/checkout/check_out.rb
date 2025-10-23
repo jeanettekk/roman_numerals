@@ -8,16 +8,11 @@ class CheckOut
 
   def scan(item)
     a_count = item.count('A')
+    number_of_discounts = (a_count / 3).floor
+    discount = number_of_discounts * 20
+    total_without_discount = a_count * 50
 
-    if a_count > 4
-      set_total(230)
-    elsif a_count > 3
-      set_total(180)
-    elsif a_count == 3
-      set_total(130)
-    else
-      set_total(a_count * 50)
-    end
+    set_total(total_without_discount - discount)
   end
 
   private
