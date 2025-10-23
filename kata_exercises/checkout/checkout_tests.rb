@@ -5,13 +5,12 @@ require_relative 'check_out'
 RSpec.describe CheckOut do
   let(:check_out) { CheckOut.new }
 
-  let(:items) { { '' => 0, 'A' => 50, 'AA' => 100, 'AAA' => 150 } }
+  ITEMS = { '' => 0, 'A' => 50, 'AA' => 100, 'AAA' => 150 }.freeze
 
-  it 'scanning empty items should not change the total' do
-    items.each do |item, expected_sum|
-      check_out
+  ITEMS.each do |item, expected_sum|
+    it "scanning item '#{item}' should result in total of #{expected_sum}" do
       check_out.scan(item)
-      expect(check_out.total).to equal(expected_sum)
+      expect(check_out.total).to eq(expected_sum)
     end
   end
 end
