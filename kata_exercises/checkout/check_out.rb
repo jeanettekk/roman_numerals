@@ -9,7 +9,11 @@ class CheckOut
   def scan(item)
     a_count = item.count('A')
 
-    set_total(a_count * 50)
+    if a_count == 3
+      set_total(130)
+    else
+      set_total(a_count * 50)
+    end
   end
 
   private

@@ -5,7 +5,7 @@ require_relative 'check_out'
 RSpec.describe CheckOut do
   let(:check_out) { CheckOut.new }
 
-  ITEMS = { '' => 0, 'A' => 50, 'AA' => 100, 'AAA' => 150 }.freeze
+  ITEMS = { '' => 0, 'A' => 50, 'AA' => 100, 'AAA' => 130 }.freeze
 
   ITEMS.each do |item, expected_sum|
     it "scanning item '#{item}' should result in total of #{expected_sum}" do
