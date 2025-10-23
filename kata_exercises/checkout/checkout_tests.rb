@@ -26,4 +26,10 @@ RSpec.describe CheckOut do
     check_out.scan("AA")
     expect(check_out.total).to eq(100)
   end
+
+  it 'scans AAA to a total of 150' do
+    check_out
+    check_out.scan("AAA")
+    expect(check_out.total).to eq(150)
+  end
 end
