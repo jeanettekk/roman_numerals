@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CheckOut
   attr_reader :total # only a getter for external use
 
@@ -6,12 +7,15 @@ class CheckOut
   end
 
   def scan(item)
-    if item == "AAA"
+    case item
+    when 'AAA'
       set_total(150)
-    elsif item == "A"
+    when 'A'
       set_total(50)
-    elsif item == "AA"
+    when 'AA'
       set_total(100)
+    else
+      set_total(0)
     end
   end
 
