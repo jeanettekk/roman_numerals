@@ -8,13 +8,16 @@ class CheckOut
       a_price = 50
       a_discount_amount = 20
       a_discount_quantity = 3
+
+      b_price = 30
       # Calculation
       a_count = item.count('A')
+      b_count = item.count('B')
       number_of_discounts = (a_count / a_discount_quantity).floor
       discount = number_of_discounts * a_discount_amount
       total_without_discount = a_count * a_price
 
-      @total = total_without_discount - discount
+      @total = total_without_discount + (b_price * b_count) - discount
     end
 
     def reset
