@@ -4,21 +4,18 @@ class CheckOut
     attr_accessor :total
 
     def scan(item)
-      # Config
-      a_price = 50
-      a_discount_amount = 20
-      a_discount_quantity = 3
-
-      b_price = 30
-      b_discount_amount = 15
-      b_discount_quantity = 2
-
-      c_price = 20
-
       # Calculation
-      discount_a, total_without_discount_a = calculate_discounted_prices(a_discount_amount, a_discount_quantity, a_price, item, 'A')
-      discount_b, total_without_discount_b = calculate_discounted_prices(b_discount_amount, b_discount_quantity, b_price, item, 'B')
-      total_without_discount_c = calculate_prices_without_discount(c_price, item)
+      discount_a, total_without_discount_a = calculate_discounted_prices(discount_amount: 20,
+                                                                         discount_quantity: 3,
+                                                                         price_per_item: 50,
+                                                                         item: item,
+                                                                         letter: 'A')
+      discount_b, total_without_discount_b = calculate_discounted_prices(discount_amount: 15,
+                                                                         discount_quantity: 2,
+                                                                         price_per_item: 30,
+                                                                         item: item,
+                                                                         letter: 'B')
+      total_without_discount_c = calculate_prices_without_discount(20, item)
 
 
       total_amount_all = total_without_discount_a + total_without_discount_b + total_without_discount_c
@@ -38,7 +35,7 @@ class CheckOut
       c_count * c_price
     end
 
-    def calculate_discounted_prices(discount_amount, discount_quantity, price_per_item, item, letter)
+    def calculate_discounted_prices(discount_amount:, discount_quantity:, price_per_item:, item:, letter:)
       letter_count = item.count(letter)
       number_of_discounts = (letter_count / discount_quantity).floor
       discount = number_of_discounts * discount_amount
