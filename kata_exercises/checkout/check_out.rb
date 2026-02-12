@@ -15,10 +15,10 @@ class CheckOut
                                                                          price_per_item: 30,
                                                                          item: item,
                                                                          letter: 'B')
-      total_without_discount_c = calculate_prices_without_discount(20, item)
+      price_c = calculate_prices_without_discount(20, item)
 
 
-      total_amount_all = total_without_discount_a + total_without_discount_b + total_without_discount_c
+      total_amount_all = total_without_discount_a + total_without_discount_b + price_c
       total_discount_all = discount_a + discount_b
 
       @total = total_amount_all - total_discount_all
