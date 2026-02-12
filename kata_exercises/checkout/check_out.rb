@@ -19,12 +19,10 @@ class CheckOut
       b_count = item.count('B')
       c_count = item.count('C')
 
-      discount_a, total_without_discount_a = calculate_prices(a_discount_amount, a_discount_quantity, a_price, item)
+      discount_a, total_without_discount_a = calculate_prices(a_discount_amount, a_discount_quantity, a_price, item, 'A')
+      discount_b, total_without_discount_b = calculate_prices(b_discount_amount, b_discount_quantity, b_price, item, 'B')
 
-      number_of_discounts_b = (b_count / b_discount_quantity).floor
-      discount_b = number_of_discounts_b * b_discount_amount
       discount_c = 0
-      total_without_discount_b = b_count * b_price
       total_without_discount_c = c_count * c_price
 
       total_amount_all = total_without_discount_a + total_without_discount_b + total_without_discount_c
@@ -39,8 +37,8 @@ class CheckOut
 
     private
 
-    def calculate_prices(discount_amount, discount_quantity, price_per_item, item)
-      letter_count = item.count('A')
+    def calculate_prices(discount_amount, discount_quantity, price_per_item, item, letter)
+      letter_count = item.count(letter)
       number_of_discounts = (letter_count / discount_quantity).floor
       discount = number_of_discounts * discount_amount
       total_without_discount = letter_count * price_per_item
