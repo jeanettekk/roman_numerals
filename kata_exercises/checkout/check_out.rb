@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Calculates checkout totals for scanned item strings using a configurable catalog
 class CheckOut
   CATALOG = {
     'A' => { price: 50, discount: { quantity: 3, amount: 20 } },
@@ -13,29 +14,8 @@ class CheckOut
     attr_accessor :total
 
     def scan(item)
-      total_amount_all = 0
-      total_discount_all = 0
-
-      CATALOG.each do |letter, data|
-        next unless data
-
-        price = data[:price]
-        if data[:discount]
-          discount, total_without_discount = calculate_discounted_prices(discount_amount: data[:discount][:amount],
-                                                                         discount_quantity: data[:discount][:quantity],
-                                                                         price_per_item: price,
-                                                                         item: item,
-                                                                         letter: letter)
-        else
-          discount = 0
-          total_without_discount = calculate_prices_without_discount(price, item, letter)
-        end
-
-        total_amount_all += total_without_discount
-        total_discount_all += discount
-      end
-
-      @total = total_amount_all - total_discount_all
+      totals = calculate_totals(item)
+      @total = totals[:total_amount] - totals[:total_discount]
     end
 
     def reset
@@ -44,17 +24,46 @@ class CheckOut
 
     private
 
-    def calculate_prices_without_discount(price_per_item, item, letter)
-      count = item.count(letter)
-      count * price_per_item
+    # Return a hash of counts for the known catalog letters
+    def parse_item_counts(item)
+      counts = {}
+      CATALOG.each_key { |k| counts[k] = item.count(k) }
+      counts
     end
 
-    def calculate_discounted_prices(discount_amount:, discount_quantity:, price_per_item:, item:, letter:)
-      letter_count = item.count(letter)
-      number_of_discounts = (letter_count / discount_quantity).floor
-      discount = number_of_discounts * discount_amount
-      total_without_discount = letter_count * price_per_item
-      [discount, total_without_discount]
+    # Calculate total without discount and discount for a single letter given its count
+    def calculate_line_total(_letter, data, count)
+      price = data[:price]
+      discount = data[:discount] ? calculate_discount_for_count(count, data[:discount]) : 0
+      total_without_discount = count * price
+
+      { total_without_discount: total_without_discount, discount: discount }
+    end
+
+    def calculate_discount_for_count(count, discount_data)
+      dq = discount_data[:quantity]
+      da = discount_data[:amount]
+      (count / dq).floor * da
+    end
+
+    # Aggregate totals for the whole item string
+    def calculate_totals(item)
+      counts = parse_item_counts(item)
+      lines = build_line_summaries(counts)
+
+      total_amount = lines.sum { |l| l[:total_without_discount] }
+      total_discount = lines.sum { |l| l[:discount] }
+
+      { total_amount: total_amount, total_discount: total_discount }
+    end
+
+    def build_line_summaries(counts)
+      counts.each_with_object([]) do |(letter, count), arr|
+        next if count.zero?
+
+        data = CATALOG[letter]
+        arr << calculate_line_total(letter, data, count)
+      end
     end
   end
 end
