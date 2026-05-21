@@ -1,25 +1,39 @@
 # frozen_string_literal: true
+
 class CheckOut
+  CATALOG = {
+    'A' => { price: 50, discount: { quantity: 3, amount: 20 } },
+    'B' => { price: 30, discount: { quantity: 2, amount: 15 } },
+    'C' => { price: 20 },
+    # D: unit price 15, discount 10 for every 15 Ds (as requested)
+    'D' => { price: 15, discount: { quantity: 15, amount: 10 } }
+  }.freeze
+
   class << self
     attr_accessor :total
 
     def scan(item)
-      # Calculation
-      discount_a, total_without_discount_a = calculate_discounted_prices(discount_amount: 20,
-                                                                         discount_quantity: 3,
-                                                                         price_per_item: 50,
-                                                                         item: item,
-                                                                         letter: 'A')
-      discount_b, total_without_discount_b = calculate_discounted_prices(discount_amount: 15,
-                                                                         discount_quantity: 2,
-                                                                         price_per_item: 30,
-                                                                         item: item,
-                                                                         letter: 'B')
-      price_c = calculate_prices_without_discount(20, item)
+      total_amount_all = 0
+      total_discount_all = 0
 
+      CATALOG.each do |letter, data|
+        next unless data
 
-      total_amount_all = total_without_discount_a + total_without_discount_b + price_c
-      total_discount_all = discount_a + discount_b
+        price = data[:price]
+        if data[:discount]
+          discount, total_without_discount = calculate_discounted_prices(discount_amount: data[:discount][:amount],
+                                                                         discount_quantity: data[:discount][:quantity],
+                                                                         price_per_item: price,
+                                                                         item: item,
+                                                                         letter: letter)
+        else
+          discount = 0
+          total_without_discount = calculate_prices_without_discount(price, item, letter)
+        end
+
+        total_amount_all += total_without_discount
+        total_discount_all += discount
+      end
 
       @total = total_amount_all - total_discount_all
     end
@@ -30,9 +44,9 @@ class CheckOut
 
     private
 
-    def calculate_prices_without_discount(c_price, item)
-      c_count = item.count('C')
-      c_count * c_price
+    def calculate_prices_without_discount(price_per_item, item, letter)
+      count = item.count(letter)
+      count * price_per_item
     end
 
     def calculate_discounted_prices(discount_amount:, discount_quantity:, price_per_item:, item:, letter:)
