@@ -7,7 +7,8 @@ class CheckOut
     'B' => { price: 30, discount: { quantity: 2, amount: 15 } },
     'C' => { price: 20 },
     # D: unit price 15, discount 10 for every 15 Ds (as requested)
-    'D' => { price: 15, discount: { quantity: 15, amount: 10 } }
+    'D' => { price: 15, discount: { quantity: 15, amount: 10 } },
+    'J' => { price: 50 }
   }.freeze
 
   class << self

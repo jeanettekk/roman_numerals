@@ -13,4 +13,3 @@
 - Questions & uncertainty: If at any point the agent is uncertain about requirements, design, or next steps, stop and ask specific clarifying questions. Provide short options where helpful.
 
 - Communication style: Keep messages and questions concise and focused. Continue only after the user answers clarification questions.
-

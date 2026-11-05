@@ -25,6 +25,9 @@ RSpec.describe CheckOut do
     'AD' => 65,
     # 15 Ds: 15 * 15 = 225 total without discount, minus 10 discount => 215
     d15 => 215,
+    'J' => 50,
+    'JJ' => 100,
+    'JJJ' => 150,
     # unknown letters ignored: 'AXZ' should be same as 'A' => 50
     'AXZ' => 50
   }.freeze
