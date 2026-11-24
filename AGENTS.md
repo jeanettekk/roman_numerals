@@ -1,5 +1,27 @@
 # AGENTS.md
 
+## Writing this file
+
+Keep every entry as short as possible without losing clarity.
+
+## Conventions
+
+Follow existing codebase patterns for tests and code. Example: one expect per test.
+
+## Testing
+
+If the repo uses Docker, run tests and linters (rspec, rubocop) via Docker commands.
+
+## OpenSpec
+
+Specs describe expected behavior only. No code references.
+
+## Logging
+
+Two options:
+- CloudWatch: use `rails_semantic_logger`.
+- Grafana: use telemetry.
+
 ## Code review
 
 When asked to review code, always dispatch the `reviewer` subagent
